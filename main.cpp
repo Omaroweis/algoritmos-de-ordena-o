@@ -10,8 +10,8 @@ using namespace std;
 
 int main()
 {
-  int repeticoes = 1;
-  while(repeticoes < 7)
+  int repeticoes = 8;
+  while(repeticoes >0)
     {
 
       map<int,string>mp;
@@ -21,7 +21,8 @@ int main()
       mp[4] = "Quick sort";
       mp[5] = "Heap sort";
       mp[6] = "Insertion sort";
-      if(repeticoes>0 && repeticoes<=6)
+      mp[7] = "Radix sort";
+      if(repeticoes>0 && repeticoes<=7)
         {
           cout<<mp[repeticoes]<<"\n";
           for(int tam=100; tam<=10000000;tam*=10)
@@ -183,6 +184,30 @@ int main()
                                       Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
                                       cout<<"randomico:"<<Tempo<<"(ms)"<<endl;
                                     }
+                                  else
+                                    {
+                                      if(repeticoes == 7)
+                                        {
+                                          clock_t Ticks[2];
+                                          Ticks[0] = clock();
+                                          Sort::radixSort(cresce, tam-1);
+                                          Ticks[1] = clock();
+                                          double Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
+                                          cout<<"crescente: "<<Tempo<<"(ms)"<<endl;
+
+                                          Ticks[0] = clock();
+                                          Sort::radixSort(descresce, tam-1);
+                                          Ticks[1] = clock();
+                                          Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
+                                          cout<<"decrescente:"<<Tempo<<"(ms)"<<endl;
+
+                                          Ticks[0] = clock();
+                                          Sort::radixSort(random, tam-1);
+                                          Ticks[1] = clock();
+                                          Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
+                                          cout<<"randomico:"<<Tempo<<"(ms)"<<endl;
+                                        }
+                                    }
                                 }
 
                             }
@@ -193,7 +218,8 @@ int main()
 
 
         }
-      repeticoes++;
+
+      repeticoes--;
 
     }
 
