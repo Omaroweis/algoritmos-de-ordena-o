@@ -182,3 +182,43 @@ void Sort::insertionSort(int *vet, int n)
       vet[j] = aux;
     }
 }
+void Sort::counting(int *vet, int n, int k)
+{
+  int *B=new int[10];
+  int *C = new int[n+1];
+  for(int i=0; i<10;i++)
+          B[i]=0;
+
+  for(int i=0; i<n;i++) //contar o numero de cada elemento
+  {
+          B[(vet[i]/k)%10]++;
+  }
+  for(int i=1; i<10;i++)
+  {
+          B[i]+=B[i-1];
+   }
+   for(int i=n-1; i>=0; --i)
+   {
+          C[ B[ (vet[i]/k)%10 ] -1] = vet[i];
+          B[(vet[i]/k)%10]--;
+
+   }
+   for(int i=0;i<n;i++)
+          vet[i] = C[i];
+
+}
+int Sort::getMax(int *vet, int n)
+{
+  int maior=vet[0];
+  for(int i=1;i<n;i++)
+  {
+          if(vet[i]>maior) maior = vet[i];
+  }
+  return maior;
+}
+void Sort::radixSort(int *vet, int n)
+{
+  int k = getMax(vet, n);
+  for(int i=1; k/i >0; i*=10)
+          counting(vet, n, i);
+}
